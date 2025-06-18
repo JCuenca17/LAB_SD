@@ -28,6 +28,7 @@ public class VentasService {
         productos.put("Laptop", new ProductoInfo(1200.0, 5));
         productos.put("Mouse", new ProductoInfo(25.5, 10));
         productos.put("Teclado", new ProductoInfo(45.9, 7));
+        productos.put("Monitor", new ProductoInfo(75.9, 4));
     }
 
     @WebMethod
