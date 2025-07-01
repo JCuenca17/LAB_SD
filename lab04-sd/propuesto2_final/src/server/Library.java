@@ -24,7 +24,11 @@ public class Library extends UnicastRemoteObject implements LibraryInterface {
         try (Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * FROM libros")) {
             while (rs.next()) {
-                list.add(rs.getString("titulo") + " (disponibles: " + rs.getInt("stock") + ")");
+                String linea = rs.getString("titulo") + ";" +
+                        rs.getString("autor") + ";" +
+                        rs.getInt("stock") + ";" +
+                        rs.getString("imagen");
+                list.add(linea);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,24 +77,19 @@ public class Library extends UnicastRemoteObject implements LibraryInterface {
     }
 
     @Override
-    public String addBook(String title, int stock) throws RemoteException {
-        try {
-            PreparedStatement check = conn.prepareStatement("SELECT * FROM libros WHERE titulo = ?");
-            check.setString(1, title);
-            ResultSet rs = check.executeQuery();
-
-            if (rs.next()) {
-                return "El libro ya existe.";
-            }
-
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO libros (titulo, stock) VALUES (?, ?)");
-            stmt.setString(1, title);
-            stmt.setInt(2, stock);
-            stmt.executeUpdate();
+    public String addBook(String titulo, String autor, int stock, String imagen) throws RemoteException {
+        try (PreparedStatement ps = conn
+                .prepareStatement("INSERT INTO libros (titulo, autor, stock, imagen) VALUES (?, ?, ?, ?)")) {
+            ps.setString(1, titulo);
+            ps.setString(2, autor);
+            ps.setInt(3, stock);
+            ps.setString(4, imagen);
+            ps.executeUpdate();
             return "Libro agregado correctamente.";
         } catch (SQLException e) {
             e.printStackTrace();
             return "Error al agregar el libro.";
         }
     }
+
 }
