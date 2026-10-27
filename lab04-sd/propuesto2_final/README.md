@@ -1,18 +1,18 @@
-## Getting Started
+# Biblioteca con RMI, Swing y MySQL
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Versión final del propuesto 2. El servidor crea su propio registro RMI en el puerto 2000 y guarda los libros en MySQL. El cliente es una ventana en Swing para ver los libros disponibles, pedirlos prestados, devolverlos y agregar nuevos con título, autor, stock e imagen.
 
-## Folder Structure
+## Estructura
 
-The workspace contains two folders by default, where:
+```
+src/interfaces/   LibraryInterface (contrato remoto)
+src/server/       Library (acceso a MySQL) y LibraryServer
+src/client/       LibraryGUI
+lib/              conector de MySQL
+```
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Ejecutarlo
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+1. Crear en MySQL una base llamada `biblioteca`. La conexión está en `src/server/Library.java` (usuario `root`, sin contraseña).
+2. Compilar las fuentes en `bin/`.
+3. Ejecutar `run_servidor.bat` y, cuando el servidor esté arriba, `run_cliente.bat`.

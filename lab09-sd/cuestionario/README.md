@@ -1,18 +1,22 @@
-## Getting Started
+# Transferencias entre usuarios
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+App de escritorio en Swing sobre la base `banco` en MySQL. Después de iniciar sesión, el usuario ve su saldo y puede transferir dinero a otro.
 
-## Folder Structure
+La transferencia está en `UserDAO.transferir`: desactiva el autocommit, descuenta el saldo de uno, lo suma al otro y confirma con `commit()`. Si algo falla en el medio, hace `rollback()` y ningún saldo cambia.
 
-The workspace contains two folders by default, where:
+## Estructura
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+```
+src/DBConnection.java   conexión a MySQL
+src/UserDAO.java        consultas y transferencia
+src/LoginFrame.java     inicio de sesión (punto de entrada)
+src/MainFrame.java      saldo y formulario de transferencia
+lib/                    conector de MySQL
+```
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Ejecutarlo
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+```
+javac -cp "lib/*" -d bin src/*.java
+java -cp "bin;lib/*" LoginFrame
+```

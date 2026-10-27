@@ -1,25 +1,25 @@
-# Práctica Java RMI - Sistemas Distribuidos
+# Lab 4: Java RMI
 
-Este proyecto contiene cuatro ejercicios desarrollados en Java utilizando RMI (Remote Method Invocation), como parte del curso de Sistemas Distribuidos.
+Objetos remotos con RMI: el servidor registra un objeto y el cliente lo usa como si fuera local.
 
-## ✅ Resuelto
+| Carpeta | Qué hace |
+|---|---|
+| `Resuelto` | Calculadora remota. Es el ejemplo de introducción |
+| `Propuesto 1` | Farmacia: agregar medicinas, consultar el stock y comprar una cantidad. El servidor se registra como `PHARMACY` |
+| `Propuesto 2` | Biblioteca: listar los libros disponibles y pedir uno prestado |
+| `propuesto2_final` | La misma biblioteca con interfaz en Swing, devolución y alta de libros, y los datos en MySQL |
 
-Implementación sencilla de una calculadora remota usando RMI. Sirve como introducción al modelo cliente-servidor con objetos distribuidos.
+## Ejecutar los ejercicios básicos
 
----
+En cada carpeta, con tres terminales:
 
-## 🧪 Propuesto 1
+```
+javac *.java
+rmiregistry
+java CalculatorServer
+java CalculatorClient 5 3
+```
 
-Sistema que permite gestionar remotamente el stock de medicamentos. Incluye funcionalidades para agregar, vender y consultar medicinas.
+En Java 8 o anterior hay que generar el stub con `rmic CalculatorImpl` antes de iniciar el registro. Para los propuestos se cambian los nombres de las clases (`ServerSide` y `ClienteSide`, `LibraryServer` y `LibraryClient`).
 
----
-
-## 📚 Propuesto 2
-
-Aplicación de biblioteca donde los usuarios pueden consultar libros disponibles, pedirlos prestados o devolverlos, todo mediante llamadas remotas.
-
----
-
-## 💻 Propuesto 2 Final
-
-Versión avanzada de la biblioteca, ahora con una interfaz gráfica desarrollada en Java Swing y conexión a base de datos MySQL mediante JDBC para persistencia real de los libros.
+El README de [propuesto2_final](propuesto2_final) explica cómo levantar la versión con base de datos.
